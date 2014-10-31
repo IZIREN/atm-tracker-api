@@ -1,7 +1,7 @@
 var express = require('express');
 var dm = require('../data/datamanager');
 var ATM = require('../models/atm');
-//var Purchase = require('../purchase');
+var Purchase = require('../models/purchase');
 
 var api = express.Router();
 
@@ -10,13 +10,11 @@ var api = express.Router();
 var atmData= null;
 dm.getDataFromFile('data/data.json', function(data) {
     atmData = JSON.parse(data);
-    console.log("atm data loaded...");
 });
 
 var userData = null;
 dm.getDataFromFile('data/user.json', function(data) {
     userData = JSON.parse(data);
-    console.log('user data loaded...');
 });
 
 api.use(function(req, res, next) {
@@ -43,6 +41,41 @@ api.route('/atm')
 
     .get(function(req, res) {
         res.json(atmData);
+    });
+
+api.route('/atm/:atm_id')
+
+    .get(function(req, res) {
+        res.json(atmData[req.params.atm_id]);
+
+    })
+
+    .put(function(req, res) {
+        var idx = req.params.atm_id;
+        for (var prop in req.body) {
+            if (req.body[prop]) {
+                atmData[idx][prop] = req.body[prop];
+            }
+        }
+        console.log(atmData[idx]);
+        res.json({msg: 'atm updated!'});
+    })
+
+    .delete(function(req, res){
+        atmData.splice(req.params.atm_id, 1);
+        res.json({msg: 'atm transaction deleted'});
+    });
+
+api.route('/atm/:atm_id/purchases')
+
+    .get(function(req, res) {
+        res.json(atmData[req.params.atm_id].purchases);
+    })
+
+    .post(function(req, res){
+        var newPurchase = req.body;
+        atmData[req.params.atm_id].purchases.push(new Purchase(newPurchase));
+        res.json({msg: 'new purchase saved!'});
     });
 
 module.exports = api;

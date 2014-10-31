@@ -1,4 +1,7 @@
 // server.js
+//=============
+// Simple RESTful web api to deliver information pertaining to
+// ATM transactions.
 
 // Initial Setup
 // ============================================
@@ -15,7 +18,6 @@ var app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-
 var port = process.env.PORT || 8080;
 
 
@@ -26,6 +28,7 @@ var routes = require('./routes/index');
 // register the routes
 // all of our routes will be prefixed with '/api'
 app.use('/api', routes);
+
 
 // start the server
 // ============================================
