@@ -23,12 +23,23 @@ api.use(function(req, res, next) {
 });
 
 
+api.param('atm_id', function(req, res, next, id) {
+    console.log('doing some validation on ' + id);
+    if (id >= 0 && id < atmData.length) {
+        console.log('id checks out...');
+        next();
+    } else {
+        res.json({msg: 'requested atm_id does not exist'});
+    }
+});
+
+
 api.get('/', function(req, res) {
     res.json({msg: 'Very well...! welcome to the api!'});
 });
 
 
-// more routes for our API will go here.
+// routes for the API
 api.route('/atm')
 
     .post(function(req, res) {
