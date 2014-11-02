@@ -1,12 +1,18 @@
 {
-    "name": "node-api",
-    "version": "0.0.1",
-    "main": "./bin/www",
-    "scripts": {
-        "start": "node ./bin/www"
-    },
-    "dependencies": {
-        "express": "~4.6.0",
-        "body-parser": "~1.9.2"
-    }
+  "name": "node-api",
+  "version": "0.0.1",
+  "main": "./bin/www",
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "express": "~4.6.0",
+    "body-parser": "~1.9.2"
+  },
+  "devDependencies": {
+    "mocha": "~2.0.1",
+    "supertest": "~0.14.0",
+    "should": "~4.1.0"
+  }
 }
