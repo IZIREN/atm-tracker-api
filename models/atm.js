@@ -1,4 +1,4 @@
-function ATM(atmObj) {
+function atm(atmObj) {
     var newATM = {};
 
     newATM.idx = atmObj.idx;
@@ -10,4 +10,4 @@ function ATM(atmObj) {
     return newATM;
 }
 
-module.exports = ATM;
+module.exports = atm;

@@ -1,4 +1,4 @@
-function Purchase(purchaseObj) {
+function purchase(purchaseObj) {
     var newPurchase = {};
 
     newPurchase.amount = purchaseObj.amount;
@@ -7,4 +7,4 @@ function Purchase(purchaseObj) {
     return newPurchase;
 }
 
-module.exports = Purchase;
+module.exports = purchase;

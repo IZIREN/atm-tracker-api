@@ -1,7 +1,8 @@
 var express = require('express');
 var dm = require('../data/datamanager');
-var ATM = require('../models/atm');
-var Purchase = require('../models/purchase');
+var atm = require('../models/atm');
+var purchase = require('../models/purchase');
+
 
 var api = express.Router();
 
@@ -45,8 +46,8 @@ api.route('/atm')
     .post(function(req, res) {
         var newItem = req.body;
         newItem.idx = atmData.length;
-        atmData.push(new ATM(newItem));
-        dm.writeDataToFile('/data/data1.json', atmData);
+        atmData.push(atm(newItem));
+       // dm.writeDataToFile('/data/data1.json', atmData);
         res.json({msg: 'data recieved and saved...'});
     })
 
@@ -85,7 +86,7 @@ api.route('/atm/:atm_id/purchases')
 
     .post(function(req, res){
         var newPurchase = req.body;
-        atmData[req.params.atm_id].purchases.push(new Purchase(newPurchase));
+        atmData[req.params.atm_id].purchases.push(purchase(newPurchase));
         res.json({msg: 'new purchase saved!'});
     });
 
