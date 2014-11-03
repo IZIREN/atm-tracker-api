@@ -12,6 +12,9 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
+// set up the environment as 'development'
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 
 // configure the app to use bodyParser()
 // this will let us get the data from a POST
