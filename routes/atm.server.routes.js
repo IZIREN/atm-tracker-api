@@ -19,13 +19,13 @@ dm.getDataFromFile('data/user.json', function(data) {
 
 module.exports = function(api) {
 
-    api.param('atm_id', function(req, res, next, id) {
+    api.param('atmId', function(req, res, next, id) {
         console.log('doing some validation on ' + id);
         if (id >= 0 && id < atmData.length) {
             console.log('id checks out...');
             next();
         } else {
-            res.json({msg: 'requested atm_id does not exist'});
+            res.json({msg: 'requested atmId does not exist'});
         }
     });
 
@@ -43,15 +43,15 @@ module.exports = function(api) {
             res.json(atmData);
         });
 
-    api.route('/atm/:atm_id')
+    api.route('/atm/:atmId')
 
         .get(function(req, res) {
-            res.json(atmData[req.params.atm_id]);
+            res.json(atmData[req.params.atmId]);
 
         })
 
         .put(function(req, res) {
-            var idx = req.params.atm_id;
+            var idx = req.params.atmId;
             for (var prop in req.body) {
                 if (req.body[prop]) {
                     atmData[idx][prop] = req.body[prop];
@@ -62,19 +62,19 @@ module.exports = function(api) {
         })
 
         .delete(function(req, res){
-            atmData.splice(req.params.atm_id, 1);
+            atmData.splice(req.params.atmId, 1);
             res.json({msg: 'atm transaction deleted'});
         });
 
-    api.route('/atm/:atm_id/purchases')
+    api.route('/atm/:atmId/purchases')
 
         .get(function(req, res) {
-            res.json(atmData[req.params.atm_id].purchases);
+            res.json(atmData[req.params.atmId].purchases);
         })
 
         .post(function(req, res){
             var newPurchase = req.body;
-            atmData[req.params.atm_id].purchases.push(purchase(newPurchase));
+            atmData[req.params.atmId].purchases.push(purchase(newPurchase));
             res.json({msg: 'new purchase saved!'});
         });
 
