@@ -11,11 +11,12 @@ side MV* framework.
 This entire project started as a practical exercise to implement much of what I was
 learning as I journeyed down the path of understanding the MEAN stack.  I am a big fan
 of an iterative approach to development, so much of what is contained here is not
-intented to be the final version.
+intented to be the final version.  Although on the surface this project may seem trivial,
+another objective of this project is to focus on sound programming/development practices.
 
 ### Defined APIs
 
-- GET    http://localhost:8080/api/
+- GET    http://localhost:8080/
 
 - GET    http://localhost:8080/api/atm
 - POST   http://localhost:8080/api/atm
@@ -23,6 +24,12 @@ intented to be the final version.
 - GET    http://localhost:8080/api/atm/:atm_id
 - PUT    http://localhost:8080/api/atm/:atm_id
 - DELETE http://localhost:8080/api/atm/:atm_id
--
+
 - GET    http://localhost:8080/api/atm/:atm_id/purchases
 - POST   http://localhost:8080/api/atm/:atm_id/purchases
+
+Node.js is required to run this project.
+
+Assuming node.js is install, run:
+
+    $ node server.js
