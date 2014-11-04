@@ -9,6 +9,9 @@ var app = express();
 
 app.set('port', process.env.PORT || 8080);
 
+// set up the environment as 'development'
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 var server = app.listen(app.get('port'), function() {
     console.log('server listening on port ' + server.address().port);
 });
