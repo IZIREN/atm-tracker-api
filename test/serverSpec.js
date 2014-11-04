@@ -5,17 +5,17 @@ var app = require('../server');
 
 
 describe('GET', function() {
-    it('call to /api should respond with json', function(done) {
+    it('call to / should respond with json', function(done) {
         request(app)
-            .get('/api')
+            .get('/')
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(200, done);
     });
 
-    it('call to /api should return a message', function(done) {
+    it('call to / should return a message', function(done) {
         request(app)
-            .get('/api')
+            .get('/')
             .set('Accept', 'application/json')
             .expect(200)
             .end(function(err, res) {

@@ -3,29 +3,14 @@
 // Simple RESTful web api to deliver information pertaining to
 // ATM transactions.
 
-// Initial Setup
-// ============================================
-
-// get the modules we need
-var express = require('express');
-var bodyParser = require('body-parser');
+var express= require('./config/express');
 
 var app = express();
 
+app.set('port', process.env.PORT || 8080);
 
-// configure the app to use bodyParser()
-// this will let us get the data from a POST
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
-
-
-
-// routes for the API
-// ============================================
-var routes = require('./routes/index');
-
-// register the routes
-// all of our routes will be prefixed with '/api'
-app.use('/api', routes);
+var server = app.listen(app.get('port'), function() {
+    console.log('server listening on port ' + server.address().port);
+});
 
 module.exports = app;

@@ -1,10 +1,18 @@
-var express = require('express');
-var dm = require('../data/datamanager');
-var atm = require('../models/atm');
-var purchase = require('../models/purchase');
+//var express = require('express');
+//var dm = require('../data/datamanager');
+//var atm = require('../models/atm');
+//var purchase = require('../models/purchase');
 
+//var api = express.Router();
 
-var api = express.Router();
+module.exports = function(app) {
+
+    app.get('/', function(req, res) {
+        res.json({msg: 'Very well...! welcome to the api!'});
+    });
+};
+
+/*
 
 // load data from json files
 // ============================================
@@ -35,9 +43,6 @@ api.param('atm_id', function(req, res, next, id) {
 });
 
 
-api.get('/', function(req, res) {
-    res.json({msg: 'Very well...! welcome to the api!'});
-});
 
 
 // routes for the API
@@ -91,3 +96,4 @@ api.route('/atm/:atm_id/purchases')
     });
 
 module.exports = api;
+*/
