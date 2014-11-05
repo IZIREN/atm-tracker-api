@@ -13,7 +13,7 @@ app.set('port', process.env.PORT || 8080);
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var server = app.listen(app.get('port'), function() {
-    console.log('server listening on port ' + server.address().port);
+    console.log('server listening on port %d', server.address().port);
 });
 
 module.exports = app;
