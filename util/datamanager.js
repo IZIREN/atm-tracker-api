@@ -13,6 +13,13 @@ exports.writeDataToFile = function(file, data) {
         if (err) {
             throw err;
         }
-        console.log('json saved to ' + file);
     });
 };
+
+exports.removeFile = function (file) {
+    fs.unlink(file, function (err) {
+        if (err) {
+            throw err;
+        }
+    })
+}
