@@ -20,7 +20,7 @@ exports.list = function(req, res) {
 
 exports.create = function(req, res) {
     var newItem = req.body;
-    newItem.idx = atmData.length;
+    newItem.id = atmData.length;
     atmData.push(atm(newItem));
     res.json({msg: 'data recieved and saved...'});
 };
@@ -30,13 +30,13 @@ exports.listById = function(req, res) {
 };
 
 exports.update = function(req, res) {
-    var idx = req.params.atmId;
+    var id = req.params.atmId;
     for (var prop in req.body) {
         if (req.body[prop]) {
-            atmData[idx][prop] = req.body[prop];
+            atmData[id][prop] = req.body[prop];
         }
     }
-    console.log(atmData[idx]);
+    console.log(atmData[id]);
     res.json({msg: 'atm updated!'});
 };
 

@@ -1,6 +1,6 @@
 [
     {
-      "idx" : 0,
+      "id" : 0,
       "cashAmount" : 40,
       "serviceFee" : 3,
       "date" : {
@@ -21,7 +21,7 @@
       ]
     },
     {
-        "idx" : 1,
+        "id" : 1,
         "cashAmount": 60,
         "serviceFee": 3,
         "date" : {
@@ -36,7 +36,7 @@
         ]
     },
     {
-        "idx" : 2,
+        "id" : 2,
         "cashAmount": 80,
         "serviceFee": 2,
         "date" : {
