@@ -20,12 +20,12 @@ module.exports = function() {
 
     require('../routes/index.server.routes')(app);
     require('../routes/atm.server.routes')(apiRouter);
-
+/*
     app.use(function(req, res, next) {
         console.log(req.method + ' request for ' + req.url);
         next();
     });
-
+*/
     app.use('/api', apiRouter);
 
     return app;

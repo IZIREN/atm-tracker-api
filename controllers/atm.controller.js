@@ -5,9 +5,7 @@ var purchase = require('../models/purchase');
 var atmData = JSON.parse(dm.getDataFromFile('./data/data.json'));
 
 exports.checkId = function(req, res, next, id) {
-    console.log('doing some validation on ' + id);
     if (id >= 0 && id < atmData.length) {
-        console.log('id checks out...');
         next();
     } else {
         res.json({msg: 'requested atmId does not exist'});
