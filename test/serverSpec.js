@@ -45,7 +45,8 @@ describe('API GET', function() {
                 res.status.should.equal(200);
                 res.body.should.be.an.Array;
                 res.body[0].should.be.an.Object;
-                res.body[0].should.have.properties('cashAmount', 'serviceFee', 'date', 'purchases');
+                res.body[0].should.have.properties('cashAmount', 'serviceFee',
+                    'dateOfTransaction', 'purchases');
                 done();
             });
     });
@@ -68,7 +69,8 @@ describe('API GET', function() {
                 res.status.should.equal(200);
                 res.body.should.be.an.Object;
                 res.body.should.not.be.an.Array;
-                res.body.should.have.properties('cashAmount', 'serviceFee', 'date', 'purchases');
+                res.body.should.have.properties('cashAmount', 'serviceFee',
+                    'dateOfTransaction', 'purchases');
                 res.body.purchases.should.be.an.Array;
                 done();
             });
