@@ -1,10 +1,12 @@
-function purchase(purchaseObj) {
-    var newPurchase = {};
+// define the Purchase model using the constructor pattern
 
-    newPurchase.amount = purchaseObj.amount;
-    newPurchase.description = purchaseObj.description;
+var Purchase = function(args) {
+    var purchase= {};
 
-    return newPurchase;
-}
+    purchase.amount = args.amount;
+    purchase.description = args.description;
 
-module.exports = purchase;
+    return purchase;
+};
+
+module.exports = Purchase;

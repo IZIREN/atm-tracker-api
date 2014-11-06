@@ -1,8 +1,17 @@
 var dm = require('../util/datamanager');
-var atm = require('../models/atm');
-var purchase = require('../models/purchase');
+var ATM = require('../models/atm');
+var Purchase = require('../models/purchase');
 
-var atmData = JSON.parse(dm.getDataFromFile('./data/data.json'));
+var atmString = dm.getDataFromFile('./data/data.json');
+var atmData = JSON.parse(atmString);
+
+function addCreatedAtProp(dataArray) {
+    for (var i = 0; i < dataArray.length; i++) {
+        if (!dataArray[i].createdAt) {
+            dataArray[i].createdAt = new Date();
+        }
+    }
+}
 
 exports.checkId = function(req, res, next, id) {
     if (id >= 0 && id < atmData.length) {
@@ -21,7 +30,7 @@ exports.list = function(req, res) {
 exports.create = function(req, res) {
     var newItem = req.body;
     newItem.id = atmData.length;
-    atmData.push(atm(newItem));
+    atmData.push(new ATM(newItem));
     res.json({msg: 'data recieved and saved...'});
 };
 
@@ -51,6 +60,6 @@ exports.listPurchases = function(req, res) {
 
 exports.createPurchase = function(req, res) {
     var newPurchase = req.body;
-    atmData[req.params.atmId].purchases.push(purchase(newPurchase));
+    atmData[req.params.atmId].purchases.push(new Purchase(newPurchase));
     res.json({msg: 'new purchase saved!'});
 };
