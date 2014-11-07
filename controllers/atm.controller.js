@@ -35,31 +35,44 @@ exports.create = function(req, res) {
 };
 
 exports.listById = function(req, res) {
-    res.json(atmData[req.params.atmId]);
+    var element = findById(req.params.atmId);
+    res.json(element);
 };
 
 exports.update = function(req, res) {
-    var id = req.params.atmId;
+    var element = findById(req.params.atmId);
+    var idx = atmData.indexOf(element);
     for (var prop in req.body) {
         if (req.body[prop]) {
-            atmData[id][prop] = req.body[prop];
+            atmData[idx][prop] = req.body[prop];
         }
     }
-    console.log(atmData[id]);
     res.json({msg: 'atm updated!'});
 };
 
 exports.delete = function(req, res) {
-    atmData.splice(req.params.atmId, 1);
+    var element = findById(req.params.atmId);
+    atmData.splice(atmData.indexOf(element), 1);
     res.json({msg: 'atm transaction deleted'});
 };
 
 exports.listPurchases = function(req, res) {
-    res.json(atmData[req.params.atmId].purchases);
+    var element = findById(req.params.atmId);
+    res.json(element.purchases);
 };
 
 exports.createPurchase = function(req, res) {
     var newPurchase = req.body;
-    atmData[req.params.atmId].purchases.push(new Purchase(newPurchase));
+    var element = findById(req.params.atmId);
+    element.purchases.push(new Purchase(newPurchase));
     res.json({msg: 'new purchase saved!'});
+};
+
+var findById = function (atmId) {
+    for (var i = 0; i < atmData.length; i++) {
+        if (atmData[i].id === Number(atmId)) {
+            return atmData[i];
+        }
+    }
+    return null;
 };
