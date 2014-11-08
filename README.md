@@ -28,8 +28,16 @@ another objective of this project is to focus on sound programming/development p
 - GET    http://localhost:8080/api/atm/:atm_id/purchases
 - POST   http://localhost:8080/api/atm/:atm_id/purchases
 
-Node.js is required to run this project.
+###Node.js is required to run this project.
 
-Assuming node.js is install, run:
+- To install the required depdencencies, run:
 
-    $ node server.js
+      $ npm install
+
+- To start the server, run:
+
+      $ node server.js
+
+- Alternatively, you can run the server utilizing the 'start' script:
+
+      $ npm start

@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "./bin/www",
   "scripts": {
-    "start": "node server",
+    "start": "node server.js",
     "test": "mocha"
   },
   "dependencies": {
