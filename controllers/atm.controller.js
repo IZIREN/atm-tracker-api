@@ -2,8 +2,12 @@ var dm = require('../util/datamanager');
 var ATM = require('../models/atm');
 var Purchase = require('../models/purchase');
 
+var idGenerator = require('../util/id-generator');
+
 var atmString = dm.getDataFromFile('./data/data.json');
 var atmData = JSON.parse(atmString);
+
+var idGen = new idGenerator(atmData.length);
 
 function addCreatedAtProp(dataArray) {
     for (var i = 0; i < dataArray.length; i++) {
@@ -29,7 +33,7 @@ exports.list = function(req, res) {
 
 exports.create = function(req, res) {
     var newItem = req.body;
-    newItem.id = atmData.length;
+    newItem.id = idGen.getNextId();
     atmData.push(new ATM(newItem));
     res.json({msg: 'data recieved and saved...'});
 };
