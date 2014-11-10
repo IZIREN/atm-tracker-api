@@ -10,7 +10,7 @@ describe('The id generator', function () {
             sut = new idGenerator();
         })
 
-        it('initializes starting id number to 0', function () {
+        it('initializes id to start at 0', function () {
             sut.should.be.defined;
             sut.getNextId().should.equal(0);
         });

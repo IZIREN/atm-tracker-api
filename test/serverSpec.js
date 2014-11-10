@@ -4,147 +4,156 @@ var should = require('should');
 var app = require('../server');
 
 
-describe('API GET', function() {
-    it('request to / should respond with json', function(done) {
-        request(app)
-            .get('/')
-            .set('Accept', 'application/json')
-            .expect('Content-Type', /json/)
-            .expect(200, done);
-    });
+describe('API', function() {
+    describe('GET /', function () {
 
-    it('request to / should return a message', function(done) {
-        request(app)
-            .get('/')
-            .set('Accept', 'application/json')
-            .expect(200)
-            .end(function(err, res) {
-                should.not.exist(err);
-                res.status.should.equal(200);
-                res.body.should.have.property("msg");
-                res.body.msg.should.not.equal(undefined);
-                done();
-            });
-    });
-
-    it('request to /api/atm should respond with json', function(done) {
-        request(app)
-            .get('/api/atm')
-            .set('Accept', 'application/json')
-            .expect('Content-Type', /json/)
-            .expect(200, done);
-    });
-
-    it('request to /api/atm should respond with list of withdrawals', function(done) {
-        request(app)
-            .get('/api/atm')
-            .set('Accept', 'application/json')
-            .expect(200)
-            .end(function(err, res) {
-                should.not.exist(err);
-                res.status.should.equal(200);
-                res.body.should.be.an.Array;
-                res.body.should.have.length(3);
-                res.body[0].should.be.an.Object;
-                res.body[0].should.have.properties('cashAmount', 'serviceFee',
-                    'dateOfTransaction', 'purchases');
-                done();
-            });
-    });
-
-    it('request to /api/atm/0 should respond with json', function(done) {
-        request(app)
-            .get('/api/atm/0')
-            .set('Accept', 'application/json')
-            .expect('Content-Type', /json/)
-            .expect(200, done);
-    });
-
-    it('request to /api/atm/0 should respond with a single withdrawal with id 0',
-        function(done) {
+        it('responds with json', function(done) {
             request(app)
-                .get('/api/atm/0')
+                .get('/')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+
+        it('returns a message', function(done) {
+            request(app)
+                .get('/')
                 .set('Accept', 'application/json')
                 .expect(200)
                 .end(function(err, res) {
                     should.not.exist(err);
                     res.status.should.equal(200);
-                    res.body.should.be.an.Object;
-                    res.body.should.not.be.an.Array;
-                    res.body.id.should.equal(0);
-                    res.body.should.have.properties('cashAmount', 'serviceFee',
-                        'dateOfTransaction', 'purchases');
-                    res.body.purchases.should.be.an.Array;
+                    res.body.should.have.property("msg");
+                    res.body.msg.should.not.equal(undefined);
                     done();
                 });
-    });
-});
-
-
-describe('API POST', function() {
-    var item;
-    before(function () {
-        item = {
-            cashAmount: 80,
-            serviceFee: 2.50,
-            dateOfTransaction: "2014-11-06T00:01:00Z",
-        }
+        });
     });
 
-    it('data to /api/atm should return an json obj with msg property',
-        function (done) {
+    describe('GET /api/atm', function () {
+
+        it('responds with json', function(done) {
             request(app)
-                .post('/api/atm')
-                .send(item)
+                .get('/api/atm')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+
+        it('responds with list of withdrawals', function(done) {
+            request(app)
+                .get('/api/atm')
+                .set('Accept', 'application/json')
+                .expect(200)
+                .end(function(err, res) {
+                    should.not.exist(err);
+                    res.status.should.equal(200);
+                    res.body.should.be.an.Array;
+                    res.body.should.have.length(3);
+                    res.body[0].should.be.an.Object;
+                    res.body[0].should.have.properties('cashAmount', 'serviceFee',
+                        'dateOfTransaction', 'purchases');
+                    done();
+                });
+        });
+    });
+
+    describe('GET /api/atm/0', function () {
+
+        it('responds with json', function(done) {
+            request(app)
+                .get('/api/atm/0')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+
+        it('responds with a single withdrawal with id 0',
+            function(done) {
+                request(app)
+                    .get('/api/atm/0')
+                    .set('Accept', 'application/json')
+                    .expect(200)
+                    .end(function(err, res) {
+                        should.not.exist(err);
+                        res.status.should.equal(200);
+                        res.body.should.be.an.Object;
+                        res.body.should.not.be.an.Array;
+                        res.body.id.should.equal(0);
+                        res.body.should.have.properties('cashAmount', 'serviceFee',
+                            'dateOfTransaction', 'purchases');
+                        res.body.purchases.should.be.an.Array;
+                        done();
+                    });
+        });
+    });
+
+    describe('POST /api/atm', function () {
+
+        var item;
+        before(function () {
+            item = {
+                cashAmount: 80,
+                serviceFee: 2.50,
+                dateOfTransaction: "2014-11-06T00:01:00Z",
+            }
+        });
+
+        it('returns an json obj with msg property',
+            function (done) {
+                request(app)
+                    .post('/api/atm')
+                    .send(item)
+                    .end(function (err, res) {
+                        should.not.exist(err);
+                        res.status.should.equal(200);
+                        res.body.should.have.property('msg');
+                        request(app)
+                            .get('/api/atm')
+                            .set('Accept', 'application/json')
+                            .expect(200)
+                            .end(function(err, res) {
+                                should.not.exist(err);
+                                res.status.should.equal(200);
+                                res.body.should.be.an.Array;
+                                res.body.should.have.length(4);
+                                res.body[3].should.be.an.Object;
+                                res.body[3].id.should.equal(3);
+                                res.body[3].should.have.properties(
+                                    'cashAmount', 'serviceFee',
+                                    'dateOfTransaction', 'purchases');
+                                done();
+                    });
+                });
+        });
+    });
+
+    describe('PUT /api/atm/1', function () {
+
+        it('updates the serviceFee property', function (done) {
+            request(app)
+                .put('/api/atm/1')
+                .send({ serviceFee: 10 })
                 .end(function (err, res) {
                     should.not.exist(err);
                     res.status.should.equal(200);
                     res.body.should.have.property('msg');
                     request(app)
-                        .get('/api/atm')
+                        .get('/api/atm/1')
                         .set('Accept', 'application/json')
                         .expect(200)
-                        .end(function(err, res) {
+                        .end(function (err, res) {
                             should.not.exist(err);
                             res.status.should.equal(200);
-                            res.body.should.be.an.Array;
-                            res.body.should.have.length(4);
-                            res.body[3].should.be.an.Object;
-                            res.body[3].id.should.equal(3);
-                            res.body[3].should.have.properties(
-                                'cashAmount', 'serviceFee',
-                                'dateOfTransaction', 'purchases');
+                            res.body.should.be.an.Object;
+                            res.body.serviceFee.should.equal(10);
                             done();
-                });
-            });
+                        })
+                })
+        });
     });
-});
 
-describe('API PUT', function() {
-    it('data to /api/atm/1 should update data', function (done) {
-        request(app)
-            .put('/api/atm/1')
-            .send({ serviceFee: 10 })
-            .end(function (err, res) {
-                should.not.exist(err);
-                res.status.should.equal(200);
-                res.body.should.have.property('msg');
-                request(app)
-                    .get('/api/atm/1')
-                    .set('Accept', 'application/json')
-                    .expect(200)
-                    .end(function (err, res) {
-                        should.not.exist(err);
-                        res.status.should.equal(200);
-                        res.body.should.be.an.Object;
-                        res.body.serviceFee.should.equal(10);
-                        done();
-                    })
-            })
+    describe('DELETE /api/atm/1', function() {
+        it('deletes the record with id of 1');
     });
-});
-
-describe('API DELETE', function() {
-    it('request to /api/atm/1 should delete record');
-
 });
