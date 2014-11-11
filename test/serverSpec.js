@@ -4,10 +4,10 @@ var should = require('should');
 var app = require('../server');
 
 
-describe('API', function() {
+describe('API', function () {
     describe('GET /', function () {
 
-        it('responds with json', function(done) {
+        it('responds with json', function (done) {
             request(app)
                 .get('/')
                 .set('Accept', 'application/json')
@@ -15,12 +15,12 @@ describe('API', function() {
                 .expect(200, done);
         });
 
-        it('returns a message', function(done) {
+        it('returns a message', function (done) {
             request(app)
                 .get('/')
                 .set('Accept', 'application/json')
                 .expect(200)
-                .end(function(err, res) {
+                .end(function (err, res) {
                     should.not.exist(err);
                     res.status.should.equal(200);
                     res.body.should.have.property("msg");
@@ -32,7 +32,7 @@ describe('API', function() {
 
     describe('GET /api/atm', function () {
 
-        it('responds with json', function(done) {
+        it('responds with json', function (done) {
             request(app)
                 .get('/api/atm')
                 .set('Accept', 'application/json')
@@ -40,12 +40,12 @@ describe('API', function() {
                 .expect(200, done);
         });
 
-        it('responds with list of withdrawals', function(done) {
+        it('responds with list of withdrawals', function (done) {
             request(app)
                 .get('/api/atm')
                 .set('Accept', 'application/json')
                 .expect(200)
-                .end(function(err, res) {
+                .end(function (err, res) {
                     should.not.exist(err);
                     res.status.should.equal(200);
                     res.body.should.be.an.Array;
@@ -60,7 +60,7 @@ describe('API', function() {
 
     describe('GET /api/atm/0', function () {
 
-        it('responds with json', function(done) {
+        it('responds with json', function (done) {
             request(app)
                 .get('/api/atm/0')
                 .set('Accept', 'application/json')
@@ -69,12 +69,12 @@ describe('API', function() {
         });
 
         it('responds with a single withdrawal with id 0',
-            function(done) {
+            function (done) {
                 request(app)
                     .get('/api/atm/0')
                     .set('Accept', 'application/json')
                     .expect(200)
-                    .end(function(err, res) {
+                    .end(function (err, res) {
                         should.not.exist(err);
                         res.status.should.equal(200);
                         res.body.should.be.an.Object;
@@ -112,7 +112,7 @@ describe('API', function() {
                             .get('/api/atm')
                             .set('Accept', 'application/json')
                             .expect(200)
-                            .end(function(err, res) {
+                            .end(function (err, res) {
                                 should.not.exist(err);
                                 res.status.should.equal(200);
                                 res.body.should.be.an.Array;
@@ -153,7 +153,35 @@ describe('API', function() {
         });
     });
 
-    describe('DELETE /api/atm/1', function() {
-        it('deletes the record with id of 1');
+    describe('DELETE /api/atm/3', function () {
+        it('responds with json', function (done) {
+            request(app)
+                .get('/api/atm/3')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+        it('deletes the record with id of 3', function (done) {
+            request(app)
+                .delete('/api/atm/3')
+                .expect(200)
+                .end(function (err, res) {
+                    should.not.exist(err);
+                    res.status.should.equal(200);
+                    res.body.should.have.property('msg');
+
+                    request(app)
+                        .get('/api/atm')
+                            .set('Accept', 'application/json')
+                            .expect(200)
+                            .end(function (err, res) {
+                                should.not.exist(err);
+                                res.status.should.equal(200);
+                                res.body.should.be.an.Array;
+                                res.body.should.have.length(3);
+                                done();
+                            });
+                });
+        });
     });
 });
