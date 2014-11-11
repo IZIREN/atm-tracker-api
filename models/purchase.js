@@ -3,8 +3,8 @@
 var Purchase = function(args) {
     var purchase= {};
 
-    purchase.amount = args.amount;
-    purchase.description = args.description;
+    purchase.amount = args.amount || 0.00;
+    purchase.description = args.description || 'no description provided';
 
     return purchase;
 };
