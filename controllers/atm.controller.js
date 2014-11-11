@@ -17,6 +17,15 @@ function addCreatedAtProp(dataArray) {
     }
 }
 
+function findById(atmId) {
+    for (var i = 0; i < atmData.length; i++) {
+        if (atmData[i].id === Number(atmId)) {
+            return atmData[i];
+        }
+    }
+    return null;
+}
+
 exports.checkId = function(req, res, next, id) {
     if (id >= 0 && id < atmData.length) {
         next();
@@ -25,11 +34,9 @@ exports.checkId = function(req, res, next, id) {
     }
 };
 
-
 exports.list = function(req, res) {
     res.json(atmData);
 };
-
 
 exports.create = function(req, res) {
     var newItem = req.body;
@@ -70,13 +77,4 @@ exports.createPurchase = function(req, res) {
     var element = findById(req.params.atmId);
     element.purchases.push(new Purchase(newPurchase));
     res.json({msg: 'new purchase saved!'});
-};
-
-var findById = function (atmId) {
-    for (var i = 0; i < atmData.length; i++) {
-        if (atmData[i].id === Number(atmId)) {
-            return atmData[i];
-        }
-    }
-    return null;
 };

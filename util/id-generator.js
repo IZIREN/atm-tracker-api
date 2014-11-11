@@ -19,6 +19,6 @@ var idGenerator = function(seed) {
     };
 
     return id;
-}
+};
 
 module.exports = idGenerator;

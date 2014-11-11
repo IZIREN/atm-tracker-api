@@ -21,5 +21,5 @@ exports.removeFile = function (file) {
         if (err) {
             throw err;
         }
-    })
-}
+    });
+};
