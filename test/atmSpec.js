@@ -1,3 +1,5 @@
+/* jshint expr: true */
+
 var should = require('should');
 var ATM = require('../models/atm');
 

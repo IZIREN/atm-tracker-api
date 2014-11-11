@@ -1,3 +1,5 @@
+/* jshint expr: true */
+
 var dm = require('../util/datamanager');
 var fs = require('fs');
 
@@ -35,7 +37,7 @@ describe('The datamanager module', function () {
 
         it('and a serviceFee property', function () {
             json[0].should.have.property('serviceFee');
-        })
+        });
     });
 
     describe('write functionality', function () {
@@ -44,7 +46,7 @@ describe('The datamanager module', function () {
             var testObj = {
                 "msg": "this is to test the write functionality"
             };
-            dm.writeDataToFile(outputFile, testObj)
+            dm.writeDataToFile(outputFile, testObj);
             fs.exists(outputFile, function (exists) {
                 exists.should.be.ok;
                 done();
@@ -55,7 +57,7 @@ describe('The datamanager module', function () {
             var contents = dm.getDataFromFile(outputFile);
             var outputJSON = JSON.parse(contents);
 
-            contents.should.be.ok
+            contents.should.be.ok;
             outputJSON.should.have.property('msg');
         });
     });

@@ -1,3 +1,5 @@
+/* jshint expr: true */
+
 var should = require('should');
 var Purchase = require('../models/purchase');
 
@@ -29,6 +31,6 @@ describe('Purchase object', function () {
         it('description property is a string', function () {
             purchase.description.should.startWith('no');
             purchase.description.should.endWith('provided');
-        })
+        });
     });
 });

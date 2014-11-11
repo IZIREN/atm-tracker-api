@@ -1,3 +1,5 @@
+/* jshint expr: true */
+
 var should = require('should');
 var idGenerator = require('../util/id-generator');
 
@@ -8,7 +10,7 @@ describe('The id generator', function () {
 
         beforeEach(function () {
             sut = new idGenerator();
-        })
+        });
 
         it('initializes id to start at 0', function () {
             sut.should.be.defined;

@@ -1,3 +1,5 @@
+/* jshint expr: true */
+
 var request = require('supertest');
 var should = require('should');
 
@@ -96,7 +98,7 @@ describe('API', function () {
                 cashAmount: 80,
                 serviceFee: 2.50,
                 dateOfTransaction: "2014-11-06T00:01:00Z",
-            }
+            };
         });
 
         it('returns an json obj with msg property',
@@ -148,8 +150,8 @@ describe('API', function () {
                             res.body.should.be.an.Object;
                             res.body.serviceFee.should.equal(10);
                             done();
-                        })
-                })
+                        });
+                });
         });
     });
 
