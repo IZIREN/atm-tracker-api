@@ -7,6 +7,7 @@
 // get the modules we need
 var express = require('express');
 var bodyParser = require('body-parser');
+var logger = require('morgan');
 
 
 // make this function available to all other modules
@@ -22,8 +23,13 @@ module.exports = function() {
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
 
+    // configure the app to use morgan (aka logger) in
+    // dev mode.  Provides log msgs to the console in the form:
+    // VERB /api/url status response time (ms) - res[content-length]
+    app.use(logger('dev'));
+
     // require the routes, passing the objects they need
-    // to define the routes on.
+    // to define the routes.
     require('../routes/index.server.routes')(app);
     require('../routes/atm.server.routes')(apiRouter);
 /*

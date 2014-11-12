@@ -7,8 +7,9 @@
     "test": "mocha"
   },
   "dependencies": {
+    "body-parser": "~1.9.2",
     "express": "~4.6.0",
-    "body-parser": "~1.9.2"
+    "morgan": "^1.5.0"
   },
   "devDependencies": {
     "mocha": "~2.0.1",
