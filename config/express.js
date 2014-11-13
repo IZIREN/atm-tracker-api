@@ -32,17 +32,46 @@ module.exports = function() {
     // to define the routes.
     require('../routes/index.server.routes')(app);
     require('../routes/atm.server.routes')(apiRouter);
-/*
-    // define middleware for all routes.  This middleware
-    // simply logs out the request method and url
-    app.use(function(req, res, next) {
-        console.log(req.method + ' request for ' + req.url);
-        next();
-    });
-*/
+
     // http://baseurl.com/api is the root for all routes
     // defined by the apiRouter.
     app.use('/api', apiRouter);
+
+
+    // the below middleware needs to be the last middleware defined.
+    // If a request makes it this far, it hasn't been routed by any
+    // of the previously defined routes, so it must be a 404.
+
+    // catch 404 and forward to error handler
+    app.use(function(req, res, next) {
+        var err = new Error('Not Found');
+        err.status = 404;
+        next(err);
+    });
+
+    // error handlers
+    //====================
+    // development error handler
+    // will print stacktrace
+    if (app.get('env') === 'development') {
+        app.use(function(err, req, res, next) {
+            res.status(err.status || 500);
+            res.json({
+                msg: err.message,
+                error: err
+            });
+        });
+    }
+
+    // production error handler
+    // no stacktraces leaked to user
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.json( {
+            msg: err.message,
+            error: {}
+        });
+    });
 
     return app;
 };

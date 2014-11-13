@@ -115,6 +115,32 @@ describe('API', function () {
         });
     });
 
+    describe('GET /api/foo', function () {
+
+        it('responds with json', function (done) {
+            request(app)
+                .get('/api/foo')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(404, done);
+        });
+
+        it('returns an error message & 404 status', function (done) {
+            request(app)
+                .get('/api/foo')
+                .set('Accept', 'application/json')
+                .expect(404)
+                .end(function (err, res) {
+                    should.not.exist(err);
+                    res.status.should.equal(404);
+                    res.body.should.have.property("msg");
+                    res.body.should.have.property("error");
+                    res.body.msg.should.not.equal(undefined);
+                    done();
+                });
+        });
+    });
+
     describe('GET /api/atm/1/purchases', function () {
 
         it('responds with json', function (done) {
