@@ -1,14 +1,25 @@
 var dm = require('../util/datamanager');
 var ATM = require('../models/atm');
 var Purchase = require('../models/purchase');
-
 var idGenerator = require('../util/id-generator');
 
+// get data from data.json file.  For now, the data is represented
+// in an in-memory array, with the initial values pulled from
+// data.json file.
+// TODO transition data from in-memory array to mongodb db using mongoose
 var atmString = dm.getDataFromFile('./data/data.json');
 var atmData = JSON.parse(atmString);
 
+// id generator intialized to start with the next id after the initial
+// data array length, since the id's are simply an integer.  Originally was
+// using the index of the particular transaction in the array, however, if that
+// transaction is deleted, the index -> id mapping is completely thrown off.
+// This will no longer be needed once the data is stored in a mongodb db.
 var idGen = new idGenerator(atmData.length);
 
+// function not used at the moment, but leaving in the code
+// in the event there is a need to populate the data with this
+// property
 function addCreatedAtProp(dataArray) {
     for (var i = 0; i < dataArray.length; i++) {
         if (!dataArray[i].createdAt) {
@@ -26,7 +37,7 @@ function findById(atmId) {
     return null;
 }
 
-exports.checkId = function(req, res, next, id) {
+exports.checkATMId = function(req, res, next, id) {
     if (id >= 0 && id < atmData.length) {
         next();
     } else {
@@ -34,6 +45,14 @@ exports.checkId = function(req, res, next, id) {
     }
 };
 
+exports.checkPurchaseId= function(req, res, next, id) {
+    var transaction = findById(req.params.atmId);
+    if (id >= 0 && id < transaction.purchases.length) {
+        next();
+    } else {
+        res.json({msg: 'requested purchase does not exist'});
+    }
+};
 exports.list = function(req, res) {
     res.json(atmData);
 };

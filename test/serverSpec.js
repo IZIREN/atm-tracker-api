@@ -90,6 +90,58 @@ describe('API', function () {
         });
     });
 
+    describe('GET /api/atm/99', function () {
+
+        it('responds with json', function (done) {
+            request(app)
+                .get('/api/atm/99')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+
+        it('returns a message', function (done) {
+            request(app)
+                .get('/')
+                .set('Accept', 'application/json')
+                .expect(200)
+                .end(function (err, res) {
+                    should.not.exist(err);
+                    res.status.should.equal(200);
+                    res.body.should.have.property("msg");
+                    res.body.msg.should.not.equal(undefined);
+                    done();
+                });
+        });
+    });
+
+    describe('GET /api/atm/1/purchases', function () {
+
+        it('responds with json', function (done) {
+            request(app)
+                .get('/api/atm/1/purchases')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+
+        it('responds with list of purchases', function (done) {
+            request(app)
+                .get('/api/atm/1/purchases')
+                .set('Accept', 'application/json')
+                .expect(200)
+                .end(function (err, res) {
+                    should.not.exist(err);
+                    res.status.should.equal(200);
+                    res.body.should.be.an.Array;
+                    res.body.should.have.length(3);
+                    res.body[0].should.be.an.Object;
+                    res.body[0].should.have.properties('amount', 'description');
+                    done();
+                });
+        });
+    });
+
     describe('POST /api/atm', function () {
 
         var item;
@@ -110,6 +162,10 @@ describe('API', function () {
                         should.not.exist(err);
                         res.status.should.equal(200);
                         res.body.should.have.property('msg');
+
+                        // once the item is added (via POST), need to verify
+                        // the array length has increased by one with a GET
+                        // request to /api/atm
                         request(app)
                             .get('/api/atm')
                             .set('Accept', 'application/json')
@@ -156,6 +212,7 @@ describe('API', function () {
     });
 
     describe('DELETE /api/atm/3', function () {
+
         it('responds with json', function (done) {
             request(app)
                 .get('/api/atm/3')
@@ -163,6 +220,7 @@ describe('API', function () {
                 .expect('Content-Type', /json/)
                 .expect(200, done);
         });
+
         it('deletes the record with id of 3', function (done) {
             request(app)
                 .delete('/api/atm/3')
