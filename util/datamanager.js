@@ -1,5 +1,14 @@
 // util/datamanager.js
 
+// simple utility module which acts as a datamanager to read/write/delete
+// data files from the project.  This is really just a wrapper module for
+// the 'fs' module, utilizing both async and sync methods.  Other than the
+// surface functionality, the motivation of this module was to get a deeper
+// understanding of callbacks and implementing node modules.
+
+// Once the data store functionality is transitioned to a mongodb database,
+// this utility module will no longer be required.
+
 var fs = require('fs');
 
 exports.getDataFromFile = function(file) {
