@@ -9,7 +9,7 @@ var app = require('../server');
 describe('API', function () {
     describe('GET /', function () {
 
-        it('responds with json', function (done) {
+        it('responds with json and status of 200', function (done) {
             request(app)
                 .get('/')
                 .set('Accept', 'application/json')
@@ -34,7 +34,7 @@ describe('API', function () {
 
     describe('GET /api/atm', function () {
 
-        it('responds with json', function (done) {
+        it('responds with json and status of 200', function (done) {
             request(app)
                 .get('/api/atm')
                 .set('Accept', 'application/json')
@@ -62,7 +62,7 @@ describe('API', function () {
 
     describe('GET /api/atm/0', function () {
 
-        it('responds with json', function (done) {
+        it('responds with json and status of 200', function (done) {
             request(app)
                 .get('/api/atm/0')
                 .set('Accept', 'application/json')
@@ -92,7 +92,7 @@ describe('API', function () {
 
     describe('GET /api/atm/99', function () {
 
-        it('responds with json', function (done) {
+        it('responds with json and status of 404', function (done) {
             request(app)
                 .get('/api/atm/99')
                 .set('Accept', 'application/json')
@@ -117,7 +117,7 @@ describe('API', function () {
 
     describe('GET /api/foo', function () {
 
-        it('responds with json', function (done) {
+        it('responds with json and status of 404', function (done) {
             request(app)
                 .get('/api/foo')
                 .set('Accept', 'application/json')
@@ -125,7 +125,7 @@ describe('API', function () {
                 .expect(404, done);
         });
 
-        it('returns an error message & 404 status', function (done) {
+        it('returns an error message', function (done) {
             request(app)
                 .get('/api/foo')
                 .set('Accept', 'application/json')
@@ -143,7 +143,7 @@ describe('API', function () {
 
     describe('GET /api/atm/1/purchases', function () {
 
-        it('responds with json', function (done) {
+        it('responds with json and status of 200', function (done) {
             request(app)
                 .get('/api/atm/1/purchases')
                 .set('Accept', 'application/json')
@@ -222,6 +222,10 @@ describe('API', function () {
                     should.not.exist(err);
                     res.status.should.equal(200);
                     res.body.should.have.property('msg');
+
+                    // once the property has been updated via a PUT request,
+                    // need to verify the property has changed by doing another
+                    // GET request for that item.
                     request(app)
                         .get('/api/atm/1')
                         .set('Accept', 'application/json')
@@ -239,7 +243,7 @@ describe('API', function () {
 
     describe('DELETE /api/atm/3', function () {
 
-        it('responds with json', function (done) {
+        it('responds with json and a status of 200', function (done) {
             request(app)
                 .get('/api/atm/3')
                 .set('Accept', 'application/json')
@@ -256,6 +260,9 @@ describe('API', function () {
                     res.status.should.equal(200);
                     res.body.should.have.property('msg');
 
+                    // once the DELETE request has been made, need to verify
+                    // that the length of the data array is decreased by one.
+                    // this is done with a GET request for all the items.
                     request(app)
                         .get('/api/atm')
                             .set('Accept', 'application/json')
