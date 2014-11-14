@@ -97,17 +97,17 @@ describe('API', function () {
                 .get('/api/atm/99')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
-                .expect(200, done);
+                .expect(404, done);
         });
 
         it('returns a message', function (done) {
             request(app)
-                .get('/')
+                .get('/api/atm/99')
                 .set('Accept', 'application/json')
-                .expect(200)
+                .expect(404)
                 .end(function (err, res) {
                     should.not.exist(err);
-                    res.status.should.equal(200);
+                    res.status.should.equal(404);
                     res.body.should.have.property("msg");
                     res.body.msg.should.not.equal(undefined);
                     done();

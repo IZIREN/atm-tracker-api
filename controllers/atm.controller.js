@@ -41,7 +41,9 @@ exports.checkATMId = function(req, res, next, id) {
     if (id >= 0 && id < atmData.length) {
         next();
     } else {
-        res.json({msg: 'requested atmId does not exist'});
+        var err = new Error('reqested atmId does not exist');
+        err.status = 404;
+        next(err);
     }
 };
 
@@ -50,7 +52,9 @@ exports.checkPurchaseId= function(req, res, next, id) {
     if (id >= 0 && id < transaction.purchases.length) {
         next();
     } else {
-        res.json({msg: 'requested purchase does not exist'});
+        var err = new Error('reqested purchase does not exist');
+        err.status = 404;
+        next(err);
     }
 };
 exports.list = function(req, res) {
