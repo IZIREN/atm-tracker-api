@@ -212,6 +212,47 @@ describe('API', function () {
         });
     });
 
+    describe('POST /api/atm/1/purchases', function () {
+
+        var item;
+        before(function () {
+            item = {
+                amount: 22,
+                description: "haircut"
+            };
+        });
+
+        it('returns an json obj with msg property',
+            function (done) {
+                request(app)
+                    .post('/api/atm/1/purchases')
+                    .send(item)
+                    .end(function (err, res) {
+                        should.not.exist(err);
+                        res.status.should.equal(200);
+                        res.body.should.have.property('msg');
+
+                        // once the item is added (via POST), need to verify
+                        // the array length has increased by one with a GET
+                        // request to /api/atm/1/purchases
+                        request(app)
+                            .get('/api/atm/1/purchases')
+                            .set('Accept', 'application/json')
+                            .expect(200)
+                            .end(function (err, res) {
+                                should.not.exist(err);
+                                res.status.should.equal(200);
+                                res.body.should.be.an.Array;
+                                res.body.should.have.length(4);
+                                res.body[3].should.be.an.Object;
+                                res.body[3].should.have.properties(
+                                    'amount', 'description');
+                                done();
+                    });
+                });
+        });
+    });
+
     describe('PUT /api/atm/1', function () {
 
         it('updates the serviceFee property', function (done) {
