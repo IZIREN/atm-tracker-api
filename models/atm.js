@@ -2,17 +2,17 @@
 
 var assert = require('assert');
 
-var ATM = function(args) {
+var ATM = function(opts) {
     var atm = {};
 
-    assert.ok(args.id, 'id is required');
+    assert.ok(opts.id, 'id is required');
 
-    atm.id = args.id;
-    atm.createdAt = args.createdAt || new Date();
-    atm.cashAmount = args.cashAmount || 0;
-    atm.serviceFee = args.serviceFee || 0;
-    atm.dateOfTransaction = new Date(args.dateOfTransaction) || new Date();
-    atm.purchases = args.purchases || [];
+    atm.id = opts.id;
+    atm.createdAt = opts.createdAt || new Date();
+    atm.cashAmount = opts.cashAmount || 0;
+    atm.serviceFee = opts.serviceFee || 0;
+    atm.dateOfTransaction = new Date(opts.dateOfTransaction) || new Date();
+    atm.purchases = opts.purchases || [];
 
     return atm;
 };
