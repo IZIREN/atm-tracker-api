@@ -4,7 +4,7 @@ var dm = require('../util/datamanager');
 var fs = require('fs');
 
 var data, json;
-var outputFile = './data/testOutput.json';
+var outputFile = './data/specOutput.json';
 before(function () {
     data = dm.getDataFromFile('./data/data.json');
     json = JSON.parse(data);

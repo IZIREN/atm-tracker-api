@@ -1,5 +1,7 @@
 /* jshint expr: true */
 
+process.env.NODE_ENV = 'test';
+
 var request = require('supertest');
 var should = require('should');
 

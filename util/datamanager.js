@@ -12,9 +12,13 @@
 var fs = require('fs');
 
 exports.getDataFromFile = function(file) {
-    var data = fs.readFileSync(file, 'utf8');
-
-    return data;
+    if (fs.existsSync(file)) {
+        var data = fs.readFileSync(file, 'utf8');
+        return data;
+    } else {
+        console.log('requested file does not exist.');
+        return;
+    }
 };
 
 exports.writeDataToFile = function(file, data) {

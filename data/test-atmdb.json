@@ -1,0 +1,94 @@
+[
+    {
+        "id": 0,
+        "cashAmount": 40,
+        "serviceFee": 3,
+        "dateOfTransaction": "2014-07-10T00:00:00Z",
+        "purchases": [
+            {
+                "amount": 3,
+                "description": "ATM service fee"
+            },
+            {
+                "amount": 5,
+                "description": "lunch"
+            },
+            {
+                "amount": 2,
+                "description": "shaving cream"
+            },
+            {
+                "amount": 2,
+                "description": "groceries"
+            },
+            {
+                "amount": 6,
+                "description": "coffee dues"
+            },
+            {
+                "amount": 6,
+                "description": "lunch"
+            },
+            {
+                "amount": 11,
+                "description": "lunch"
+            },
+            {
+                "amount": 1,
+                "description": "tip"
+            },
+            {
+                "amount": 5,
+                "description": "lunch"
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "cashAmount": 60,
+        "serviceFee": 3,
+        "dateOfTransaction": "2014-07-03T00:00:00Z",
+        "purchases": [
+            {
+                "amount": 3,
+                "description": "ATM service fee"
+            },
+            {
+                "amount": 5,
+                "description": "lunch"
+            },
+            {
+                "amount": 6,
+                "description": "coffee dues"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "cashAmount": 80,
+        "serviceFee": 2,
+        "dateOfTransaction": "2014-08-03T00:00:00Z",
+        "purchases": [
+            {
+                "amount": 2,
+                "description": "ATM service fee"
+            },
+            {
+                "amount": 5,
+                "description": "lunch"
+            },
+            {
+                "amount": 20,
+                "description": "groceries"
+            },
+            {
+                "amount": 6,
+                "description": "coffee dues"
+            },
+            {
+                "amount": 6,
+                "description": "dinner"
+            }
+        ]
+    }
+]
