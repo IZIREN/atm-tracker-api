@@ -98,6 +98,11 @@ exports.delete = function(req, res) {
     res.json({msg: 'atm transaction deleted'});
 };
 
+
+// functions for the 'purchases' of a particulary atm
+// transaction
+//===================================================
+
 exports.listPurchases = function(req, res) {
     var element = findById(req.params.atmId);
     res.json(element.purchases);
@@ -109,3 +114,6 @@ exports.createPurchase = function(req, res) {
     element.purchases.push(new Purchase(newPurchase));
     res.json({msg: 'new purchase saved!'});
 };
+
+// TODO: add function to delete a purchase
+// TODO: add function to update a purchase

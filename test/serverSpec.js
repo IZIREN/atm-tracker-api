@@ -1,5 +1,9 @@
 /* jshint expr: true */
 
+// set the environment to 'test'.  This will determine
+// which config object is returned from config/data.js.
+// This config object determines which input and output
+// files to use during testing.
 process.env.NODE_ENV = 'test';
 
 var request = require('supertest');
