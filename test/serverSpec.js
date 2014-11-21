@@ -1,7 +1,7 @@
 /* jshint expr: true */
 
 // set the environment to 'test'.  This will determine
-// which config object is returned from config/data.js.
+// which config object is returned from config/config.js.
 // This config object determines which input and output
 // files to use during testing.
 process.env.NODE_ENV = 'test';
@@ -174,6 +174,34 @@ describe('API', function () {
         });
     });
 
+    describe('GET /api/atm/1/purchases/1', function () {
+
+        it('responds with json and status of 200', function (done) {
+            request(app)
+                .get('/api/atm/1/purchases/1')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+
+        it('responds with single purchase containing amount and description properties',
+            function(done) {
+                request(app)
+                    .get('/api/atm/1/purchases/1')
+                    .set('Accept', 'application/json')
+                    .expect(200)
+                    .end(function (err, res) {
+                        should.not.exist(err);
+                        res.status.should.equal(200);
+                        res.body.should.be.an.Object;
+                        res.body.should.not.be.an.Array;
+                        res.body.should.have.properties('amount', 'description');
+                        done();
+                    });
+        });
+
+    });
+
     describe('POST /api/atm', function () {
 
         var item;
@@ -290,14 +318,6 @@ describe('API', function () {
 
     describe('DELETE /api/atm/3', function () {
 
-        it('responds with json and a status of 200', function (done) {
-            request(app)
-                .get('/api/atm/3')
-                .set('Accept', 'application/json')
-                .expect('Content-Type', /json/)
-                .expect(200, done);
-        });
-
         it('deletes the record with id of 3', function (done) {
             request(app)
                 .delete('/api/atm/3')
@@ -319,6 +339,36 @@ describe('API', function () {
                                 res.status.should.equal(200);
                                 res.body.should.be.an.Array;
                                 res.body.should.have.length(3);
+                                done();
+                            });
+                });
+        });
+    });
+
+    describe('DELETE /api/atm/0/purchases/5', function () {
+
+        it('deletes the 5th purchase of the first atm transaction', function (done) {
+
+            request(app)
+                .delete('/api/atm/0/purchases/5')
+                .expect(200)
+                .end(function (err, res) {
+                    should.not.exist(err);
+                    res.status.should.equal(200);
+                    res.body.should.have.property('msg');
+
+                    // once the DELETE request has been made, need to verify
+                    // that the length of the data array is decreased by one.
+                    // this is done with a GET request for all purchase items.
+                    request(app)
+                        .get('/api/atm/0/purchases')
+                            .set('Accept', 'application/json')
+                            .expect(200)
+                            .end(function (err, res) {
+                                should.not.exist(err);
+                                res.status.should.equal(200);
+                                res.body.should.be.an.Array;
+                                res.body.should.have.length(8);
                                 done();
                             });
                 });

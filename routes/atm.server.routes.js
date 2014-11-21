@@ -33,5 +33,11 @@ module.exports = function(api) {
 
         .post(atmCtrl.createPurchase);
 
+    api.route('/atm/:atmId/purchases/:purchaseId')
+
+        .get(atmCtrl.listOnePurchase)
+
+        .delete(atmCtrl.deletePurchase);
+
     return api;
 };

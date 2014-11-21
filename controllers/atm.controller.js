@@ -1,4 +1,4 @@
-var config = require('../config/config')
+var config = require('../config/config');
 var dm = require('../util/datamanager');
 var ATM = require('../models/atm');
 var Purchase = require('../models/purchase');
@@ -108,6 +108,11 @@ exports.listPurchases = function(req, res) {
     res.json(element.purchases);
 };
 
+exports.listOnePurchase = function(req, res) {
+    var element = findById(req.params.atmId);
+    res.json(element.purchases[req.params.purchaseId]);
+};
+
 exports.createPurchase = function(req, res) {
     var newPurchase = req.body;
     var element = findById(req.params.atmId);
@@ -115,5 +120,10 @@ exports.createPurchase = function(req, res) {
     res.json({msg: 'new purchase saved!'});
 };
 
-// TODO: add function to delete a purchase
+exports.deletePurchase = function(req, res) {
+    var element = findById(req.params.atmId);
+    element.purchases.splice(req.params.purchaseId, 1);
+    res.json({msg: 'purchase deleted!'});
+};
+
 // TODO: add function to update a purchase
