@@ -1,18 +1,15 @@
+var config = require('../config/config')
 var dm = require('../util/datamanager');
 var ATM = require('../models/atm');
 var Purchase = require('../models/purchase');
 var idGenerator = require('../util/id-generator');
-var Dataconfig = require('../config/data');
 
-var dataconfig = new Dataconfig();
 
 // get data from data.json file.  For now, the data is represented
 // in an in-memory array, with the initial values pulled from
 // data.json file.
 // TODO transition data from in-memory array to mongodb db using mongoose
-
-//var atmString = dm.getDataFromFile('./data/data.json');
-var atmString = dm.getDataFromFile(dataconfig.inputFile);
+var atmString = dm.getDataFromFile(config.inputFile);
 var atmData = JSON.parse(atmString);
 
 // id generator intialized to start with the next id after the initial
@@ -70,7 +67,8 @@ exports.create = function(req, res) {
     var newItem = req.body;
     newItem.id = idGen.getNextId();
     atmData.push(new ATM(newItem));
-    dm.writeDataToFile(dataconfig.outputFile, atmData);
+    // dm.writeDataToFile(dataconfig.outputFile, atmData);
+    dm.writeDataToFile(config.outputFile, atmData);
     res.json({msg: 'data recieved and saved...'});
 };
 
@@ -87,14 +85,16 @@ exports.update = function(req, res) {
             atmData[idx][prop] = req.body[prop];
         }
     }
-    dm.writeDataToFile(dataconfig.outputFile, atmData);
+    // dm.writeDataToFile(dataconfig.outputFile, atmData);
+    dm.writeDataToFile(config.outputFile, atmData);
     res.json({msg: 'atm updated!'});
 };
 
 exports.delete = function(req, res) {
     var element = findById(req.params.atmId);
     atmData.splice(atmData.indexOf(element), 1);
-    dm.writeDataToFile(dataconfig.outputFile, atmData);
+    // dm.writeDataToFile(dataconfig.outputFile, atmData);
+    dm.writeDataToFile(config.outputFile, atmData);
     res.json({msg: 'atm transaction deleted'});
 };
 
