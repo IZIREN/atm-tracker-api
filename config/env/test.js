@@ -7,6 +7,6 @@
 // are not what is expected
 module.exports = {
     
-    inputFile: 'data/test-atmdb.json',
-    outputFile: 'data/test-outputdb.json'
+    inputFile: './app/data/test-atmdb.json',
+    outputFile: './app/data/test-outputdb.json'
 };

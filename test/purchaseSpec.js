@@ -1,7 +1,7 @@
 /* jshint expr: true */
 
 var should = require('should');
-var Purchase = require('../models/purchase');
+var Purchase = require('../app/models/purchase');
 
 describe('Purchase object', function () {
 

@@ -30,8 +30,8 @@ module.exports = function() {
 
     // require the routes, passing the objects they need
     // to define the routes.
-    require('../routes/index.server.routes')(app);
-    require('../routes/atm.server.routes')(apiRouter);
+    require('../app/routes/index.server.routes')(app);
+    require('../app//routes/atm.server.routes')(apiRouter);
 
     // http://baseurl.com/api is the root for all routes
     // defined by the apiRouter.

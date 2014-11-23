@@ -1,8 +1,8 @@
-var config = require('../config/config');
-var dm = require('../util/datamanager');
+var config = require('../../config/config');
+var dm = require('../../util/datamanager');
 var ATM = require('../models/atm');
 var Purchase = require('../models/purchase');
-var idGenerator = require('../util/id-generator');
+var idGenerator = require('../../util/id-generator');
 
 
 // get data from data.json file.  For now, the data is represented

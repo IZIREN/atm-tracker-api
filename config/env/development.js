@@ -1,5 +1,5 @@
 module.exports = {
     
-    inputFile: 'data/dev-atmdb.json',
-    outputFile: 'data/dev-atmdb.json'
+    inputFile: './app/data/dev-atmdb.json',
+    outputFile: './app/data/dev-atmdb.json'
 };

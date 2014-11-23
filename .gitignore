@@ -1,4 +1,4 @@
 node_modules
 *.swp
 .c9
-data/test-outputdb.json
+*/data/test-outputdb.json

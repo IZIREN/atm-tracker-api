@@ -1,12 +1,13 @@
 /* jshint expr: true */
 
 var dm = require('../util/datamanager');
+var should = require('should');
 var fs = require('fs');
 
 var data, json;
-var outputFile = './data/specOutput.json';
+var outputFile = './app/data/specOutput.json';
 before(function () {
-    data = dm.getDataFromFile('./data/data.json');
+    data = dm.getDataFromFile('./app/data/data.json');
     json = JSON.parse(data);
     console.log('BEFORE: json data read and parsed');
 });
