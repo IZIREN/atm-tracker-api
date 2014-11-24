@@ -369,6 +369,22 @@ describe('API', function () {
         });
     });
 
+    describe('PUT /api/atm/1/purchases/2', function () {
+
+        it('updates the description property', function (done) {
+
+            request(app)
+                .put('/api/atm/1/purchases/2')
+                .send({ description: "this item is updated!" })
+                .end(function (err, res) {
+                    should.not.exist(err);
+                    res.status.should.equal(200);
+                    res.body.should.have.property('msg');
+                    done();
+                });
+        });
+    });
+
     describe('DELETE /api/atm/3', function () {
 
         it('deletes the record with id of 3', function (done) {

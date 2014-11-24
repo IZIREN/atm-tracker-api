@@ -37,6 +37,8 @@ module.exports = function(api) {
 
         .get(atmCtrl.listOnePurchase)
 
+        .put(atmCtrl.updatePurchase)
+
         .delete(atmCtrl.deletePurchase);
 
     return api;

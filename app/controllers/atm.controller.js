@@ -39,6 +39,7 @@ function findById(atmId) {
     return null;
 }
 
+// middleware to verify a valid atm id
 exports.checkATMId = function(req, res, next, id) {
     if (id >= 0 && id < atmData.length) {
         next();
@@ -49,6 +50,7 @@ exports.checkATMId = function(req, res, next, id) {
     }
 };
 
+// middleware to verify a valid purchase id
 exports.checkPurchaseId= function(req, res, next, id) {
     var transaction = findById(req.params.atmId);
     if (id >= 0 && id < transaction.purchases.length) {
@@ -59,48 +61,55 @@ exports.checkPurchaseId= function(req, res, next, id) {
         next(err);
     }
 };
+
+
+// Controller functions for use in routing.
+
+// list all atm transactions
 exports.list = function(req, res) {
     res.json(atmData);
 };
 
+// create a new atm transaction
 exports.create = function(req, res) {
     var newItem = req.body;
     newItem.id = idGen.getNextId();
     atmData.push(new ATM(newItem));
-    // dm.writeDataToFile(dataconfig.outputFile, atmData);
     dm.writeDataToFile(config.outputFile, atmData);
     res.json({msg: 'data recieved and saved...'});
 };
 
+// list a single atm transaction based on id
 exports.listById = function(req, res) {
     var element = findById(req.params.atmId);
     res.json(element);
 };
 
+// update an existing atm transaction
 exports.update = function(req, res) {
     var element = findById(req.params.atmId);
     var idx = atmData.indexOf(element);
     for (var prop in req.body) {
-        if (req.body[prop]) {
+        if (atmData[idx][prop]) {
             atmData[idx][prop] = req.body[prop];
         }
     }
-    // dm.writeDataToFile(dataconfig.outputFile, atmData);
     dm.writeDataToFile(config.outputFile, atmData);
     res.json({msg: 'atm updated!'});
 };
 
+// delete an existing atm transacton based on id
 exports.delete = function(req, res) {
     var element = findById(req.params.atmId);
     atmData.splice(atmData.indexOf(element), 1);
-    // dm.writeDataToFile(dataconfig.outputFile, atmData);
     dm.writeDataToFile(config.outputFile, atmData);
     res.json({msg: 'atm transaction deleted'});
 };
 
 
-// functions for the 'purchases' of a particulary atm
-// transaction
+//===================================================
+// below are functions relating to the 'purchases' of a
+// particulary atm transaction
 //===================================================
 
 exports.listPurchases = function(req, res) {
@@ -126,4 +135,15 @@ exports.deletePurchase = function(req, res) {
     res.json({msg: 'purchase deleted!'});
 };
 
-// TODO: add function to update a purchase
+exports.updatePurchase = function(req, res) {
+    var atmElement = findById(req.params.atmId);
+    var idx = atmData.indexOf(atmElement);
+    var purchaseItem = atmData[idx].purchases[req.params.purchaseId];
+    for (var prop in req.body) {
+        if (purchaseItem[prop]) {
+            purchaseItem[prop] = req.body[prop];
+        }
+    }
+    dm.writeDataToFile(config.outputFile, atmData);
+    res.json({msg: 'atm purchase updated!'});
+};
