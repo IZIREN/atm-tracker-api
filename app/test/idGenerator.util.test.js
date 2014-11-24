@@ -1,7 +1,7 @@
 /* jshint expr: true */
 
-var should = require('should');
-var idGenerator = require('../util/id-generator');
+require('should');
+var idGenerator = require('../../util/id-generator');
 
 describe('The id generator', function () {
 

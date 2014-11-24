@@ -4,7 +4,7 @@
   "main": "./bin/www",
   "scripts": {
     "start": "node server.js",
-    "test": "mocha"
+    "test": "grunt jshint && mocha app/test/"
   },
   "dependencies": {
     "body-parser": "~1.9.2",

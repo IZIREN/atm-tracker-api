@@ -9,7 +9,7 @@ process.env.NODE_ENV = 'test';
 var request = require('supertest');
 var should = require('should');
 
-var app = require('../server');
+var app = require('../../server');
 
 
 describe('API', function () {

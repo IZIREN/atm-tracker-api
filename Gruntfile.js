@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 
         jshint: {
             files: ['Gruntfile.js', 'server.js'],
-            tests: 'test/*.js',
+            tests: 'app/test/*.js',
             controllers: 'app/controllers/*.js',
             models: 'app/models/*.js',
             routes: 'app/routes/*.js',

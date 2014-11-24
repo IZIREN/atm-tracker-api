@@ -1,7 +1,7 @@
 /* jshint expr: true */
 
-var dm = require('../util/datamanager');
-var should = require('should');
+var dm = require('../../util/datamanager');
+require('should');
 var fs = require('fs');
 
 var data, json;
