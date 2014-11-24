@@ -6,11 +6,11 @@ module.exports = function(grunt) {
         jshint: {
             files: ['Gruntfile.js', 'server.js'],
             tests: 'test/*.js',
-            controllers: 'controllers/*.js',
-            models: 'models/*.js',
-            routes: 'routes/*.js',
+            controllers: 'app/controllers/*.js',
+            models: 'app/models/*.js',
+            routes: 'app/routes/*.js',
             util: 'util/*.js',
-            config: 'config/*.js',
+            config: 'config/**/*.js',
 
             options: {
                 node: true,
