@@ -1,10 +1,10 @@
 {
   "name": "node-api",
-  "version": "0.0.1",
-  "main": "./bin/www",
+  "version": "0.0.2",
+  "main": "server",
   "scripts": {
     "start": "node server.js",
-    "test": "grunt jshint && mocha app/test/"
+    "test": "mocha app/test/"
   },
   "dependencies": {
     "body-parser": "~1.9.2",
