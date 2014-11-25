@@ -4,7 +4,7 @@
   "main": "server",
   "scripts": {
     "start": "node server.js",
-    "test": "mocha app/test/"
+    "test": "mocha util/test/ app/test/"
   },
   "dependencies": {
     "body-parser": "~1.9.2",
