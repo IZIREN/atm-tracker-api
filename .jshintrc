@@ -1,3 +1,11 @@
 {
-    "camelcase": true
+    "camelcase": true,
+    "curly": true,
+    "eqeqeq": true,
+    "forin": true,
+    "indent": true,
+    "latedef": "nofunc",
+    "validthis": true,
+    "node": true,
+    "mocha": true
 }
