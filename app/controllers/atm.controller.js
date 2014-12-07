@@ -1,7 +1,7 @@
 var config = require('../../config/config');
 var dm = require('../../util/datamanager');
-var ATM = require('../models/atm');
-var Purchase = require('../models/purchase');
+var ATM = require('../models/atm.server.model');
+var Purchase = require('../models/purchase.server.model');
 var idGenerator = require('../../util/id-generator');
 
 

@@ -1,7 +1,7 @@
 /* jshint expr: true */
 
 require('should');
-var ATM = require('../models/atm');
+var ATM = require('../models/atm.server.model');
 
 describe('ATM object', function () {
 

@@ -1,7 +1,7 @@
 /* jshint expr: true */
 
 require('should');
-var Purchase = require('../models/purchase');
+var Purchase = require('../models/purchase.server.model');
 
 describe('Purchase object', function () {
 
@@ -32,5 +32,27 @@ describe('Purchase object', function () {
             purchase.description.should.startWith('no');
             purchase.description.should.endWith('provided');
         });
+    });
+
+    describe('specific purchase object', function () {
+
+        var purchase = null;
+
+        before(function () {
+            purchase = new Purchase({
+                amount: 12,
+                description: 'test amount'
+            });
+        });
+
+        it('amount property is 12', function () {
+            purchase.amount.should.equal(12);
+        });
+
+        it('description property is \'test amount\'', function () {
+            purchase.description.should.startWith('test');
+            purchase.description.should.endWith('amount');
+        });
+
     });
 });
