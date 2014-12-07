@@ -3,18 +3,23 @@
 var assert = require('assert');
 
 var ATM = function(opts) {
-    var atm = {};
 
     assert.ok(opts.id, 'id is required');
 
-    atm.id = opts.id;
-    atm.createdAt = opts.createdAt || new Date();
-    atm.cashAmount = opts.cashAmount || 0;
-    atm.serviceFee = opts.serviceFee || 0;
-    atm.dateOfTransaction = new Date(opts.dateOfTransaction) || new Date();
-    atm.purchases = opts.purchases || [];
+    this.id = opts.id;
+    this.createdAt = opts.createdAt || new Date();
+    this.cashAmount = opts.cashAmount || 0;
+    this.serviceFee = opts.serviceFee || 0;
+    this.dateOfTransaction = new Date(opts.dateOfTransaction) || new Date();
+    this.purchases = opts.purchases || [];
+    this.totalSpent = this.getTotalSpent();
 
-    return atm;
+};
+
+ATM.prototype.getTotalSpent = function() {
+    return this.purchases.reduce(function (a, b) {
+        return a + b.amount;
+    }, 0);
 };
 
 module.exports = ATM;
