@@ -1,7 +1,7 @@
 [
     {
         "id": 0,
-        "cashAmount": 40,
+        "cashAmount": 100,
         "serviceFee": 3,
         "dateOfTransaction": "2014-07-10T00:00:00Z",
         "purchases": [
@@ -41,7 +41,8 @@
                 "amount": 5,
                 "description": "lunch"
             }
-        ]
+        ],
+        "totalSpent": 41
     },
     {
         "id": 1,
@@ -61,7 +62,8 @@
                 "amount": 6,
                 "description": "coffee dues"
             }
-        ]
+        ],
+        "totalSpent": 14
     },
     {
         "id": 2,
@@ -89,6 +91,7 @@
                 "amount": 6,
                 "description": "dinner"
             }
-        ]
+        ],
+        "totalSpent": 39
     }
 ]

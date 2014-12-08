@@ -1,7 +1,7 @@
 [
     {
       "id" : 0,
-      "cashAmount" : 40,
+      "cashAmount" : 100,
       "serviceFee" : 3,
       "dateOfTransaction": "2014-07-10T00:00:00Z",
       "purchases" : [
@@ -14,7 +14,8 @@
         {"amount": 11, "description": "lunch"},
         {"amount": 1, "description": "tip"},
         {"amount": 5, "description": "lunch"}
-      ]
+      ],
+      "totalSpent": 41
     },
     {
         "id" : 1,
@@ -25,7 +26,8 @@
             {"amount": 3, "description": "ATM service fee"},
             {"amount": 5, "description": "lunch"},
             {"amount": 6, "description": "coffee dues"}
-        ]
+        ],
+        "totalSpent": 14
     },
     {
         "id" : 2,
@@ -38,6 +40,7 @@
             {"amount": 20, "description": "groceries"},
             {"amount": 6, "description": "coffee dues"},
             {"amount": 6, "description": "dinner"}
-        ]
+        ],
+        "totalSpent": 39
     }
 ]
