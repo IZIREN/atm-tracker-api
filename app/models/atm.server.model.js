@@ -4,7 +4,7 @@ var assert = require('assert');
 
 var ATM = function(opts) {
 
-    assert.ok(opts.id, 'id is required');
+    // assert.ok(opts.id, 'id is required');
 
     this.id = opts.id;
     this.createdAt = opts.createdAt || new Date();
@@ -20,6 +20,10 @@ ATM.prototype.getTotalSpent = function() {
     return this.purchases.reduce(function (a, b) {
         return a + b.amount;
     }, 0);
+};
+
+ATM.prototype.updateTotalSpent = function() {
+    this.totalSpent = this.getTotalSpent();
 };
 
 module.exports = ATM;

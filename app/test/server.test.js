@@ -60,7 +60,7 @@ describe('API', function () {
                     res.body.should.have.length(3);
                     res.body[0].should.be.an.Object;
                     res.body[0].should.have.properties('cashAmount', 'serviceFee',
-                        'dateOfTransaction', 'purchases');
+                        'dateOfTransaction', 'purchases', 'totalSpent');
                     done();
                 });
         });
@@ -89,8 +89,9 @@ describe('API', function () {
                         res.body.should.not.be.an.Array;
                         res.body.id.should.equal(0);
                         res.body.should.have.properties('cashAmount', 'serviceFee',
-                            'dateOfTransaction', 'purchases');
+                            'dateOfTransaction', 'purchases', 'totalSpent');
                         res.body.purchases.should.be.an.Array;
+                        res.body.totalSpent.should.equal(41);
                         done();
                     });
         });

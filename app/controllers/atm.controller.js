@@ -10,7 +10,7 @@ var idGenerator = require('../../util/id-generator');
 // data.json file.
 // TODO transition data from in-memory array to mongodb db using mongoose
 var atmString = dm.getDataFromFile(config.inputFile);
-var atmData = JSON.parse(atmString);
+var atmData = initDataObjects(JSON.parse(atmString));
 
 // id generator intialized to start with the next id after the initial
 // data array length, since the id's are simply an integer.  Originally was
@@ -28,6 +28,17 @@ function addCreatedAtProp(dataArray) {
             dataArray[i].createdAt = new Date();
         }
     }
+}
+
+// initialize the data read in from file as an arrary of
+// ATM objects.  This is required so that the ATM data has
+// access to the all the methods of the ATM object.
+function initDataObjects(dataArray) {
+    var objArray = [];
+    for (var j = 0; j < dataArray.length; j++) {
+        objArray.push(new ATM(dataArray[j]));
+    }
+    return objArray;
 }
 
 function findById(atmId) {
@@ -76,7 +87,8 @@ exports.create = function(req, res) {
     newItem.id = idGen.getNextId();
     atmData.push(new ATM(newItem));
     dm.writeDataToFile(config.outputFile, atmData);
-    res.json({msg: 'data recieved and saved...'});
+    res.json({msg: 'data recieved and saved...',
+              data: newItem });
 };
 
 // list a single atm transaction based on id
@@ -95,15 +107,19 @@ exports.update = function(req, res) {
         }
     }
     dm.writeDataToFile(config.outputFile, atmData);
-    res.json({msg: 'atm updated!'});
+    res.json({msg: 'atm updated!',
+              data: atmData[idx]});
 };
 
 // delete an existing atm transacton based on id
 exports.delete = function(req, res) {
     var element = findById(req.params.atmId);
-    atmData.splice(atmData.indexOf(element), 1);
+    var idx = atmData.indexOf(element);
+    vare deletedObj = atmData[idx];
+    atmData.splice(idx, 1);
     dm.writeDataToFile(config.outputFile, atmData);
-    res.json({msg: 'atm transaction deleted'});
+    res.json({msg: 'atm transaction deleted',
+              data: deletedObj});
 };
 
 
@@ -126,13 +142,19 @@ exports.createPurchase = function(req, res) {
     var newPurchase = req.body;
     var element = findById(req.params.atmId);
     element.purchases.push(new Purchase(newPurchase));
-    res.json({msg: 'new purchase saved!'});
+    element.updateTotalSpent();
+    dm.writeDataToFile(config.outputFile, atmData);
+    res.json({msg: 'new purchase saved!',
+              data: element});
 };
 
 exports.deletePurchase = function(req, res) {
     var element = findById(req.params.atmId);
     element.purchases.splice(req.params.purchaseId, 1);
-    res.json({msg: 'purchase deleted!'});
+    element.updateTotalSpent();
+    dm.writeDataToFile(config.outputFile, atmData);
+    res.json({msg: 'purchase deleted!',
+              data: element});
 };
 
 exports.updatePurchase = function(req, res) {
@@ -144,6 +166,8 @@ exports.updatePurchase = function(req, res) {
             purchaseItem[prop] = req.body[prop];
         }
     }
+    atmElement.updateTotalSpent();
     dm.writeDataToFile(config.outputFile, atmData);
-    res.json({msg: 'atm purchase updated!'});
+    res.json({msg: 'atm purchase updated!',
+              data: atmData[idx]});
 };
