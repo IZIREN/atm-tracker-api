@@ -4,7 +4,7 @@
 // which config object is returned from config/config.js.
 // This config object determines which input and output
 // files to use during testing.
-process.env.NODE_ENV = 'test';
+// process.env.NODE_ENV = 'test';
 
 var request = require('supertest');
 var should = require('should');
