@@ -26,7 +26,9 @@ module.exports = function() {
     // configure the app to use morgan (aka logger) in
     // dev mode.  Provides log msgs to the console in the form:
     // VERB /api/url status response time (ms) - res[content-length]
-    app.use(logger('dev'));
+    if (process.env.NODE_ENV === 'development') {
+        app.use(logger('dev'));
+    }
 
     // require the routes, passing the objects they need
     // to define the routes.
