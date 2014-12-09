@@ -115,7 +115,7 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
     var element = findById(req.params.atmId);
     var idx = atmData.indexOf(element);
-    vare deletedObj = atmData[idx];
+    var deletedObj = atmData[idx];
     atmData.splice(idx, 1);
     dm.writeDataToFile(config.outputFile, atmData);
     res.json({msg: 'atm transaction deleted',
