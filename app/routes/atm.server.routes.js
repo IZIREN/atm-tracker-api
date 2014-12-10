@@ -1,4 +1,4 @@
-var atmCtrl = require('../controllers/atm.controller');
+var atmCtrl = require('../controllers/atm.server.controller');
 
 module.exports = function(api) {
 

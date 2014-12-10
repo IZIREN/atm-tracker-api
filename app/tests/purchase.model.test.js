@@ -3,9 +3,9 @@
 require('should');
 var Purchase = require('../models/purchase.server.model');
 
-describe('Purchase object', function () {
+describe('Purchase Model Unit Tests:', function () {
 
-    describe('default', function () {
+    describe('Testing default values', function () {
         var purchase = null;
 
         before(function () {
@@ -34,7 +34,7 @@ describe('Purchase object', function () {
         });
     });
 
-    describe('specific purchase object', function () {
+    describe('Testing instantiation with specific values', function () {
 
         var purchase = null;
 

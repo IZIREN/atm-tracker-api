@@ -3,9 +3,9 @@
 require('should');
 var ATM = require('../models/atm.server.model');
 
-describe('ATM object', function () {
+describe('ATM Model Unit Tests:', function () {
 
-    describe('default', function () {
+    describe('Testing default values', function () {
 
         var atm = {};
 
@@ -39,7 +39,7 @@ describe('ATM object', function () {
 
     });
 
-    describe('specific ATM object', function () {
+    describe('Testing instantiation with specific values', function () {
         var atm = {};
 
         before(function () {
@@ -75,7 +75,6 @@ describe('ATM object', function () {
 
         it('has total amount spent of 10', function () {
             atm.totalSpent.should.equal(10);
-            // atm.getTotalSpent().should.equal(10);
         });
 
     });
