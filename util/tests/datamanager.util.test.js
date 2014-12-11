@@ -1,4 +1,5 @@
 /* jshint expr: true */
+/* global describe before after it */
 
 var dm = require('../../util/datamanager');
 require('should');
@@ -6,20 +7,17 @@ var fs = require('fs');
 
 var data, json;
 var outputFile = './app/data/specOutput.json';
+
 before(function () {
     data = dm.getDataFromFile('./app/data/data.json');
     json = JSON.parse(data);
     console.log('BEFORE: json data read and parsed');
 });
 
-after(function () {
-    dm.removeFile(outputFile);
-    console.log('AFTER: test file removed');
-});
 
-describe('The datamanager module', function () {
+describe('Datamanager Module Unit Tests:', function () {
 
-    describe('read functionality', function () {
+    describe('Testing the read functionality', function () {
 
         it('should read in a file', function () {
             data.should.be.ok;
@@ -41,7 +39,7 @@ describe('The datamanager module', function () {
         });
     });
 
-    describe('write functionality', function () {
+    describe('Testing the write functionality', function () {
 
         it('should write to a file', function (done) {
             var testObj = {
@@ -62,4 +60,10 @@ describe('The datamanager module', function () {
             outputJSON.should.have.property('msg');
         });
     });
+
+});
+
+after(function () {
+    dm.removeFile(outputFile);
+    console.log('AFTER: test file removed');
 });

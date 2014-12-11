@@ -1,11 +1,12 @@
 /* jshint expr: true */
+/* global describe beforeEach it */
 
 require('should');
 var idGenerator = require('../../util/id-generator');
 
-describe('The id generator', function () {
+describe('ID Generator Unit Tests:', function () {
 
-    describe('with no initial seed parameter', function () {
+    describe('Testing instantiation without initial seed parameter', function () {
         var sut = null;
 
         beforeEach(function () {
@@ -26,7 +27,7 @@ describe('The id generator', function () {
         });
     });
 
-    describe('with an initial parameter of 10', function () {
+    describe('Testing instantiation with an initial parameter of 10', function () {
         var sut = null;
 
         beforeEach(function () {
